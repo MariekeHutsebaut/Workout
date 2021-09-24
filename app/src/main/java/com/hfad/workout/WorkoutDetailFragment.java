@@ -11,6 +11,14 @@ public class WorkoutDetailFragment extends Fragment {
     private long workoutId;
 
     @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null){
+            workoutId = savedInstanceState.getLong("workoutId");
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         return inflater.inflate(R.layout.fragment_workout_detail, container, false);
     }
@@ -26,6 +34,11 @@ public class WorkoutDetailFragment extends Fragment {
             TextView description = (TextView) view.findViewById(R.id.textDescription);
             description.setText(workout.getDescription());
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        savedInstanceState.putLong("workoutId", workoutId);
     }
 
     public void setWorkout(long id){
